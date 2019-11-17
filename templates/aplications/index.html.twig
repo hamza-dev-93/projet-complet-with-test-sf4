@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Aplications index{% endblock %}
+
+{% block body %}
+    <h1>Aplications index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for aplication in aplications %}
+            <tr>
+                <td>{{ aplication.id }}</td>
+                <td>{{ aplication.name }}</td>
+                <td>{{ aplication.createdAt ? aplication.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('aplications_show', {'id': aplication.id}) }}">show</a>
+                    <a href="{{ path('aplications_edit', {'id': aplication.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('aplications_new') }}">Create new</a>
+{% endblock %}
