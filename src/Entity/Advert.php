@@ -69,6 +69,11 @@ class Advert
      */
     private $aplications;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Photo", mappedBy="advert", cascade={"persist", "remove"})
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->date         = new \Datetime();
@@ -222,5 +227,23 @@ class Advert
    public function __toString()
    {
            return $this->getTitle();
+   }
+
+   public function getPhoto(): ?Photo
+   {
+       return $this->photo;
+   }
+
+   public function setPhoto(?Photo $photo): self
+   {
+       $this->photo = $photo;
+
+       // set (or unset) the owning side of the relation if necessary
+       $newAdvert = null === $photo ? null : $this;
+       if ($photo->getAdvert() !== $newAdvert) {
+           $photo->setAdvert($newAdvert);
+       }
+
+       return $this;
    }
 }

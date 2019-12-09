@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Advert;
+use App\Form\PhotoType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,7 @@ class AdvertType extends AbstractType
             ->add('categories')
             ->add('author')
             ->add('aplications')
+            ->add('photo', PhotoType::class)
         ;
     }
 

@@ -37,6 +37,7 @@ class AdvertController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($advert);
+            $entityManager->persist($advert->getPhoto());
             $entityManager->flush();
 
             return $this->redirectToRoute('advert_index');
